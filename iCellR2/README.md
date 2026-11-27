@@ -12,7 +12,7 @@ SODAviewer **v0.2.4** download links live on the **SODA & viewer** tab.
 Open:
 
 ```bash
-open index.html
+open /Users/khodaa01/Downloads/Git/iCellR2/iCellR2_Tutorials/0_iCellR2_dashboard/index.html
 ```
 
 ## Tabs
