@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iCell Suite — iCellR2 · iCellPy · SODA · bash CLI · SODA viewer</title>
-<meta name="dashboard-version" content="0.3.0">
+<meta name="dashboard-version" content="0.3.1">
 <meta name="dashboard-date" content="2026-11-27">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -1191,6 +1191,39 @@
     background: rgba(255,255,255,0.08);
     color: #e2e8f0;
   }
+  .soda-downloads {
+    margin: 18px 0 0;
+  }
+  .soda-downloads .lang-note {
+    margin: 0 0 12px;
+  }
+  .soda-downloads .lang-note a {
+    color: #0284c7;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .soda-downloads table.cmp td:last-child {
+    font-weight: 500;
+  }
+  .soda-downloads .dl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .soda-downloads .dl-link:hover {
+    border-bottom-color: #93c5fd;
+  }
+  .soda-downloads .dl-asset {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem;
+    color: #334155;
+    font-weight: 500;
+  }
   #page-pipeline.active { background: linear-gradient(180deg, #f8fafc 0%, #ffffff 120px); }
 
   /* Generic clickable detail targets across pages */
@@ -1479,7 +1512,7 @@
 
 <header class="header">
   <div class="header-version" aria-label="Dashboard version">
-    <div class="hv-ver">Dashboard v0.3.0</div>
+    <div class="hv-ver">Dashboard v0.3.1</div>
     <div class="hv-date">2026-11-27</div>
     <div class="hv-pkgs">iCellR2 2.0.12 · iCellPy 0.2.9 · SODAviewer 0.2.4</div>
   </div>
@@ -1802,6 +1835,42 @@ obj = ic.run_pca(obj, npcs=50)
       <span>Color by · Scale / Palette · Feature / bubble / heatmaps · Lasso · Pan · Export · macOS DMG</span>
       <div class="soda-os"><span>Win</span><span>Mac</span><span>Linux</span></div>
     </div>
+  </div>
+
+  <div class="card soda-downloads" id="sodaviewer-downloads">
+    <div class="card-title">Downloads · SODAviewer</div>
+    <p class="lang-note">Direct links from the <a href="https://github.com/rezakj/SODAviewer/releases/tag/v0.2.4" target="_blank" rel="noopener">v0.2.4 release</a>.</p>
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Asset</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>macOS (Apple Silicon)</td>
+          <td><span class="dl-asset">SODAviewer-0.2.4-macos-arm64.dmg</span></td>
+          <td><a class="dl-link" href="https://github.com/rezakj/SODAviewer/releases/download/v0.2.4/SODAviewer-0.2.4-macos-arm64.dmg">Download DMG</a></td>
+        </tr>
+        <tr class="hi">
+          <td>macOS (Apple Silicon)</td>
+          <td><span class="dl-asset">SODAviewer-0.2.4-macos-arm64.zip</span></td>
+          <td><a class="dl-link" href="https://github.com/rezakj/SODAviewer/releases/download/v0.2.4/SODAviewer-0.2.4-macos-arm64.zip">Download ZIP</a></td>
+        </tr>
+        <tr>
+          <td>Windows (portable)</td>
+          <td><span class="dl-asset">SODAviewer-windows.zip</span></td>
+          <td><a class="dl-link" href="https://github.com/rezakj/SODAviewer/releases/download/v0.2.4/SODAviewer-windows.zip">Download ZIP</a></td>
+        </tr>
+        <tr class="hi">
+          <td>Linux / any OS (JAR)</td>
+          <td><span class="dl-asset">SODAviewer-0.2.4.jar</span></td>
+          <td><a class="dl-link" href="https://github.com/rezakj/SODAviewer/releases/download/v0.2.4/SODAviewer-0.2.4.jar">Download JAR</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="quote-banner teal" style="margin-bottom:0">
@@ -4335,7 +4404,7 @@ iCellR2 open -soda project.soda</pre>
       img: 'examples/soda/soda-viewer.svg?v=2',
       what: '<h4>What it is</h4><p>A Java Swing desktop app (Win / Mac / Linux) that opens a <code>*.soda/</code> folder. File · Edit · View · Help; reduction + gene Plot types (Feature, box, violin, bubble, cell/cluster heatmap, gene–gene); Color by (clusters, conditions, pseudotime…); Scale vs Palette; lasso / pan / session cluster tools; Export.</p>',
       why: '<h4>Why it matters</h4><ul><li>Collaborators may not have your compute environment installed.</li><li>QC and result browsing should not require re-running the pipeline.</li><li>Same archive the analysis wrote — viewer never mutates SODA.</li></ul>',
-      results: '<h4>What you get</h4><ul><li>Bundled app / DMG or <code>java -jar SODAviewer.jar</code>.</li><li>Multi-gene Feature panels export as one image.</li><li>Compute in R or Python; browse from the same path.</li></ul>'
+      results: '<h4>What you get</h4><ul><li>Bundled app / DMG or <code>java -jar SODAviewer.jar</code> — see <a href="#sodaviewer-downloads">Downloads · SODAviewer</a> (v0.2.4).</li><li>Multi-gene Feature panels export as one image.</li><li>Compute in R or Python; browse from the same path.</li></ul>'
     },
     soda_inside: {
       title: 'What’s inside *.soda/',
