@@ -1,0 +1,167 @@
+# iCellR2 benchmark.txt — timing for every function run in this SODA archive
+# SODA:    /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+# Updated: 2026-09-22 15:34:31 EDT
+#
+# Wall = elapsed clock time. CPU = user+system process time.
+# RAM Δ = peak R memory growth during the call (MB).
+# This file is rewritten after each finished iCellR2 function.
+#
+------+------------------------+------------+----------+----------+---------------------------
+   #  | function               | wall       |  CPU (s) | RAM Δ MB | finished
+------+------------------------+------------+----------+----------+---------------------------
+   1  | make.obj               | 2.0s       |      1.5 |      +37 | 2026-09-22 15:11:36 EDT
+   2  | qc.stats               | 47.7s      |     44.0 |     +103 | 2026-09-22 15:12:25 EDT
+   3  | qc.dashboard           | 3.6s       |      3.5 |     +108 | 2026-09-22 15:12:29 EDT
+   4  | qc.dashboard           | 0.4s       |      0.4 |       +2 | 2026-09-22 15:12:29 EDT
+   5  | cell.filter            | 0.7s       |      0.7 |      +32 | 2026-09-22 15:12:30 EDT
+   6  | norm.data              | 3:40       |    203.7 |   +10750 | 2026-09-22 15:16:10 EDT
+   7  | gene.stats             | 1:22       |     69.9 |    +7446 | 2026-09-22 15:17:32 EDT
+   8  | make.gene.model        | 0.3s       |      0.3 |       +0 | 2026-09-22 15:17:35 EDT
+   9  | run.pca                | 8:44       |    501.7 |   +13831 | 2026-09-22 15:26:19 EDT
+  10  | run.umap               | 1:53       |    112.5 |     +156 | 2026-09-22 15:28:12 EDT
+  11  | run.clustering         | 1:45       |    105.4 |     +322 | 2026-09-22 15:29:58 EDT
+  12  | run.cgumap             | 1:43       |    103.4 |     +148 | 2026-09-22 15:31:44 EDT
+  13  | run.pseudotime         | 26.1s      |     26.0 |     +149 | 2026-09-22 15:32:11 EDT
+  14  | pseudotime.arrows      | 1.4s       |      1.4 |     +111 | 2026-09-22 15:32:20 EDT
+  15  | pseudotime.arrows      | 1.0s       |      1.0 |     +110 | 2026-09-22 15:32:21 EDT
+  16  | findMarkers            | 2:07       |    120.7 |    +7496 | 2026-09-22 15:34:31 EDT
+------+------------------------+------------+----------+----------+---------------------------
+#
+# INPUT / OUTPUT PATHS
+# --------------------
+#    1  make.obj
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/rawdata/320k_Human_PBMCs_Sub_Pool_16-plex_GEM-X_FLEX/my340k_tenx.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/rawdata/320k_Human_PBMCs_Sub_Pool_16-plex_GEM-X_FLEX/my340k_tenx.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/iCellR2.log
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    2  qc.stats
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/counts/my340k/my340k.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/cell_data.tsv
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/counts/my340k/my340k.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/iCellR2.log
+#          - path3: nGenes, UMIs, mito.percent, S/G2M scores → cell_data
+#          - path4: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/cell_data.tsv
+#          - path5: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    3  qc.dashboard
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    4  qc.dashboard
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    5  cell.filter
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/filters/kept_cell_ids.tsv
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/filters/kept_cell_ids.tsv
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/cell_data.tsv
+#          - path4: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    6  norm.data
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/counts/my340k/my340k.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/counts/my340k/my340k.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/size_factors.tsv
+#          - path4: data
+#          - path5: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    7  gene.stats
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/rna_gene_stats.tsv
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/rna_gene_stats.tsv
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    8  make.gene.model
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/rna_gene_model.tsv
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/rna_gene_model.tsv
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/plot2_GM.html
+#          - path4: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#    9  run.pca
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/modalities/rna/assays/data/my340k/my340k.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/feature_loadings.h5
+#          - path4: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/stdev.tsv
+#          - path5: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   10  run.umap
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/umap/cell_embeddings.h5
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/iCellR2.log
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/umap/cell_embeddings.h5
+#          - path4: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   11  run.clustering
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/clustering/rna_cluster_id.tsv
+#        inputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pca/cell_embeddings.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/clustering/rna_cluster_id.tsv
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   12  run.cgumap
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/cgumap/cell_embeddings.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/cgumap/cell_embeddings.h5
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   13  run.pseudotime
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pseudotime/cell_embeddings.h5
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/reductions/pseudotime/cell_embeddings.h5
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   14  pseudotime.arrows
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   15  pseudotime.arrows
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#   16  findMarkers
+#        input:   /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#        output:  /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/markers/rna_findMarkers.tsv
+#        outputs:
+#          - path1: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda
+#          - path2: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/metadata/markers/rna_findMarkers.tsv
+#          - path3: /Users/khodaa01/Downloads/Git/iCellR2/demo_iCellR2_320k/iCellR2.soda/benchmark.txt
+#
+# TOTALS
+#   Tools finished: 16
+#   Total wall:     22:37
+#   Total CPU:      1296.0s
+#   Peak RAM Δ:     +13831 MB
+#   Last step:      findMarkers
+#   Last finished:  2026-09-22 15:34:31 EDT
+#
