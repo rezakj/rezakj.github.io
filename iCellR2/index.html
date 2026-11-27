@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iCell Suite — iCellR2 · iCellPy · SODA · bash CLI · SODA viewer</title>
-<meta name="dashboard-version" content="0.3.1">
+<meta name="dashboard-version" content="0.3.2">
 <meta name="dashboard-date" content="2026-11-27">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -1512,7 +1512,7 @@
 
 <header class="header">
   <div class="header-version" aria-label="Dashboard version">
-    <div class="hv-ver">Dashboard v0.3.1</div>
+    <div class="hv-ver">Dashboard v0.3.2</div>
     <div class="hv-date">2026-11-27</div>
     <div class="hv-pkgs">iCellR2 2.0.12 · iCellPy 0.2.9 · SODAviewer 0.2.4</div>
   </div>
@@ -3713,17 +3713,67 @@ iCellR2 open -soda project.soda</pre>
 </div>
 
 <script>
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('page-' + tab.dataset.page).classList.add('active');
-      if (tab.dataset.page === 'overview') initOverview();
-      if (tab.dataset.page === 'bench') initBench();
-    });
-  });
+  // Shareable hash deep links: #tutorials, #sodaviewer, #knetl, …
+  // Canonical hashes are readable; aliases accept data-page / page-id forms.
+  const PAGE_HASH = {
+    overview: 'overview',
+    soda: 'sodaviewer',
+    pipeline: 'pipeline',
+    bench: 'benchmarks',
+    tutorials: 'tutorials',
+    'tut-install': 'install',
+    'tut-small': 'small',
+    'tut-large': 'large',
+    'tut-hto': 'hto',
+    'tut-batch': 'batch',
+    'tut-knetl': 'knetl',
+    'tut-impute': 'impute',
+    'tut-pseudo': 'pseudo',
+    'tut-cite': 'cite',
+    'tut-vdj': 'vdj',
+    'tut-st': 'st',
+    'tut-visium': 'visium',
+    'tut-atac': 'atac',
+    'tut-multi': 'multi'
+  };
+  const HASH_TO_PAGE = {
+    overview: 'overview',
+    soda: 'soda',
+    sodaviewer: 'soda',
+    'sodaviewer-downloads': 'soda',
+    pipeline: 'pipeline',
+    bench: 'bench',
+    benchmarks: 'bench',
+    tutorials: 'tutorials',
+    install: 'tut-install',
+    'tut-install': 'tut-install',
+    small: 'tut-small',
+    'tut-small': 'tut-small',
+    large: 'tut-large',
+    'tut-large': 'tut-large',
+    hto: 'tut-hto',
+    'tut-hto': 'tut-hto',
+    batch: 'tut-batch',
+    'tut-batch': 'tut-batch',
+    knetl: 'tut-knetl',
+    'tut-knetl': 'tut-knetl',
+    impute: 'tut-impute',
+    'tut-impute': 'tut-impute',
+    pseudo: 'tut-pseudo',
+    'tut-pseudo': 'tut-pseudo',
+    cite: 'tut-cite',
+    'tut-cite': 'tut-cite',
+    vdj: 'tut-vdj',
+    'tut-vdj': 'tut-vdj',
+    st: 'tut-st',
+    'tut-st': 'tut-st',
+    visium: 'tut-visium',
+    'tut-visium': 'tut-visium',
+    atac: 'tut-atac',
+    'tut-atac': 'tut-atac',
+    multi: 'tut-multi',
+    'tut-multi': 'tut-multi'
+  };
 
   const blue = '#2563eb';       /* iCellR2 — vivid blue */
   const teal = '#0d9488';       /* small scale / accent */
@@ -4158,23 +4208,54 @@ iCellR2 open -soda project.soda</pre>
     });
   }
 
-  function showPage(pageId) {
+  function currentHashKey() {
+    return (location.hash || '').replace(/^#/, '').trim().toLowerCase().split(/[/?&]/)[0];
+  }
+
+  function showPage(pageId, opts = {}) {
     const id = pageId.startsWith('page-') ? pageId : ('page-' + pageId);
     const page = document.getElementById(id);
     if (!page) return;
+    const pageKey = id.replace(/^page-/, '');
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     page.classList.add('active');
     // Keep Tutorials tab highlighted for tutorial subpages
-    const mainTab = id.startsWith('page-tut-') ? 'tutorials' : id.replace(/^page-/, '');
+    const mainTab = id.startsWith('page-tut-') ? 'tutorials' : pageKey;
     const tab = document.querySelector('.tab[data-page="' + mainTab + '"]');
     if (tab) tab.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!opts.fromHash || !opts.scrollTo) {
+      window.scrollTo({ top: 0, behavior: opts.fromHash ? 'auto' : 'smooth' });
+    }
     requestAnimationFrame(() => measureEmbeds(page));
     if (mainTab === 'overview') initOverview();
     if (mainTab === 'bench') initBench();
+    if (!opts.fromHash) {
+      const hash = opts.hash || PAGE_HASH[pageKey] || pageKey;
+      if (currentHashKey() !== hash) location.hash = hash;
+    }
+    if (opts.scrollTo) {
+      const el = document.getElementById(opts.scrollTo);
+      if (el) {
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: opts.fromHash ? 'auto' : 'smooth', block: 'start' });
+        });
+      }
+    }
   }
 
+  function applyLocationHash() {
+    const key = currentHashKey();
+    if (!key) return;
+    const pageKey = HASH_TO_PAGE[key];
+    if (!pageKey) return;
+    const scrollTo = (key === 'sodaviewer-downloads') ? 'sodaviewer-downloads' : undefined;
+    showPage(pageKey, { fromHash: true, scrollTo: scrollTo });
+  }
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => showPage(tab.dataset.page));
+  });
   document.querySelectorAll('.tut-topics button[data-page]').forEach(btn => {
     btn.addEventListener('click', () => showPage(btn.dataset.page));
   });
@@ -4220,20 +4301,12 @@ iCellR2 open -soda project.soda</pre>
       try { f.contentWindow.postMessage('icellr2-embed-measure', '*'); } catch (e) {}
     });
   }
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      if (tab.dataset.page === 'tutorials') {
-        setTimeout(() => measureEmbeds(document.querySelector('.page.active')), 50);
-      }
-    });
+  document.querySelectorAll('[data-jump]').forEach(btn => {
+    btn.addEventListener('click', () => showPage(btn.dataset.jump));
   });
 
-  document.querySelectorAll('[data-jump]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = document.querySelector(`.tab[data-page="${btn.dataset.jump}"]`);
-      if (target) target.click();
-    });
-  });
+  window.addEventListener('hashchange', applyLocationHash);
+  applyLocationHash();
 
 
 

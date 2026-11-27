@@ -5,7 +5,7 @@ Static HTML dashboard for **iCell Suite** — iCellR2 · iCellPy · SODA · SODA
 > One suite. One archive. R, Python, and desktop.
 
 **Version:** set in `index.html` via `<meta name="dashboard-version">` / `<meta name="dashboard-date">`
-and the top-right `.header-version` badge (currently **v0.3.1 · 2026-11-27**).
+and the top-right `.header-version` badge (currently **v0.3.2 · 2026-11-27**).
 Tip package labels in the badge: iCellR2 **2.0.12** · iCellPy **0.2.9** · SODAviewer **0.2.4**.
 SODAviewer **v0.2.4** download links live on the **SODA & viewer** tab.
 
@@ -14,6 +14,19 @@ Open:
 ```bash
 open /Users/khodaa01/Downloads/Git/iCellR2/iCellR2_Tutorials/0_iCellR2_dashboard/index.html
 ```
+
+## Shareable links (hash)
+
+Tab / section switches update `location.hash`. Examples (published site):
+
+- https://rezakj.github.io/iCellR2/#tutorials
+- https://rezakj.github.io/iCellR2/#sodaviewer
+- https://rezakj.github.io/iCellR2/#sodaviewer-downloads
+- https://rezakj.github.io/iCellR2/#knetl
+- https://rezakj.github.io/iCellR2/#benchmarks
+- https://rezakj.github.io/iCellR2/#install
+
+Aliases also accepted (`#soda`, `#bench`, `#tut-knetl`, …).
 
 ## Tabs
 
